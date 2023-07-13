@@ -1,4 +1,4 @@
-# verynutrition  
+# very-nutrition  
 an app for tracking nutrition.  
 
 final project, ITEC 6450.  
@@ -7,6 +7,6 @@ final project, ITEC 6450.
 
 At a cli, enter:  
 `git clone https://[repository]`  
-`cd verynutrition`
+`cd very-nutrition`
 `npm install`
 
