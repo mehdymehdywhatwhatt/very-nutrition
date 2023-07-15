@@ -1,17 +1,17 @@
 import { keyRapidAPI } from '../constants';
-const axios = require('axios');
+import axios from 'axios';
 
 const urlSpoonacular =
   'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com';
 
-async function getFoodProduct(foodProduct) {
+async function getFoodProducts(foodName) {
   const options = {
     method: 'GET',
     url: `${urlSpoonacular}/food/products/search`,
     params: {
-      query : foodProduct,
-      offset : 0,
-      number : 1,
+      query : foodName,
+      offset : '0',
+      number : '10',
     },
     headers: {
       'X-RapidAPI-Key': keyRapidAPI,
@@ -24,6 +24,7 @@ async function getFoodProduct(foodProduct) {
     return response.data;
   }
   catch (error) {
+    console.log(`error: failed getFoodProducts: ${error}`);
     return {};
   }
 };
@@ -43,11 +44,12 @@ async function getFoodProductDetails(id) {
     return response.data;
   }
   catch (error) {
+    console.log(`error: failed getFoodProductDetails: ${error}`);
     return {};
   }
 }
 
-export { getFoodProduct, getFoodProductDetails };
+export { getFoodProducts, getFoodProductDetails };
 
 // Spoonacular Recipe - Food - Nutrition API
 // 

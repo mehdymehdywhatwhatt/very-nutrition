@@ -3,7 +3,8 @@ import { View,
   TextInput,
   TouchableOpacity,
   ScrollView,
-  Platform } from 'react-native';
+  Platform,
+  FlatList, } from 'react-native';
 
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -11,36 +12,63 @@ import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 
 import WorkScreenRibbon from '../components/WorkScreenRibbon';
+import FoodProduct from '../components/FoodProduct';
+
+import { getFoodProducts, getFoodProductDetails } from '../api/Spoonacular';
 
 const textInputHeight = 30;
 
 export default function DefineMealScreen() {
 
-  [foods, set_foods] = useState([]);
+  [searchedFood, set_searchedFood] = useState('');
+  [foundFoodProducts, set_foundFoodProducts] = useState([]);
+
+  const fetchFoodIds = async () => {
+    const data = await getFoodProducts(searchedFood);
+    if (data && data.products) {
+      set_foundFoodProducts(data.products);
+      console.log(data.products);
+    }
+  }
+
+  useEffect( () => {
+    fetchFoodIds();
+  }, [searchedFood]);
 
   return (
+
   <View style={{ flex : 1, backgroundColor : 'white' }}>
   <WorkScreenRibbon/>
 
-  // this textinput says, search for this food.
-  <TextInput style={{ height : textInputHeight, backgroundColor : 'lightgray' }}/>
+  <TextInput style={{ height : textInputHeight, backgroundColor : 'lightgray' }}
+    onChangeText={(text) => {set_searchedFood(text)}}/>
 
-  // this scrollview says, here's all the foods that your search brought up
-  // each element will have a touchableopacity to put that food, into this meal
-  <ScrollView style={{ flex : 1 }}>
-  </ScrollView>
-
-  // this scrollview is the foods you have in this meal so far
-  <ScrollView style={{ flex : 1 }}>
-  </ScrollView>
-
-  // this scrollview is the meals you have so far (its own component?)
-  <ScrollView>
-  </ScrollView>
+  <FlatList
+  data={foundFoodProducts}
+  renderItem={ ({item}) => {
+    return <FoodProduct id={item.id} image={item.image} imageType={item.imageType} title={item.title}/>;
+  }}/>
 
   </View>
+
   );
 }
+
+
+  // this textinput says, search for this food.
+
+  // {displayFoodIds('banana')}
+  // this scrollview says, here's all the foods that your search brought up
+  // each element will have a touchableopacity to put that food, into this meal
+
+  // // this scrollview is the foods you have in this meal so far
+  // <ScrollView style={{ flex : 1 }}>
+  // </ScrollView>
+
+  // // this scrollview is the meals you have so far (its own component?)
+  // <ScrollView>
+  // </ScrollView>
+
 
 // how i want to go about defining a meal:
 //   access a nutrition api of selectable foods
