@@ -1,9 +1,11 @@
 import { Image,
+StyleSheet,
 View,
 Text,
 TouchableOpacity,
 ScrollView,
-Platform } from 'react-native';
+Platform,
+Dimensions } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
@@ -11,29 +13,52 @@ import { StatusBar } from 'expo-status-bar';
 
 import { AppColors, AppFonts, AppSizes } from '../constants';
 
-export default function FoodProduct({id, image, imageType, title}) {
-  const navigation = useNavigation();
+const maxProductTitleLength = 24;
+const { width, height } = Dimensions.get('window');
 
-  return (
-  <View style={{ flex : 1,
-    backgroundColor : 'white',
+const styles = StyleSheet.create({
+  container : {
+    borderRadius : 10,
     borderColor : 'black',
-    borderRadius : AppSizes.HomeScreenElementBorderRadius,
-    borderWidth : AppSizes.HomeScreenElementBorderWidth,
-    height : AppSizes.HomeScreenElementHeight,
-    padding : AppSizes.HomeScreenElementPadding }}>
+    borderStyle : 'solid',
+    borderWidth : 3,
+    backgroundColor : 'white',
+    padding : 10,
+    width : '60%',
+    height : 200,
+  },
+  containerTouchable : {
+    flex : 1,
+  },
+  productTitle : {
+    fontSize : 16,
+    color : 'black',
+    textAlignVertical : 'bottom',
+    textAlign : 'right',
+    fontWeight : '600',
+  },
+  image : {
+    flex : 1,
+  }
+});
 
-  <TouchableOpacity style={{ flex : 1 }}>
+const maxImageDimension = 200;
 
-  <Text style={{ flex : 1,
-    fontSize : AppSizes.HomeScreenElementTextSize,
-    textAlign : 'center',
-    textAlignVertical : 'center' }}>{title}</Text>
+export default function FoodProduct({id, image, imageType, title}) {
 
-  <Image style={{ flex : 1 }} resizeMode='cover' src={image}/>
+  const navigation = useNavigation();
+  return (
+  <View style={styles.container}>
+  <TouchableOpacity style={ styles.containerTouchable }>
+    <Image style={ styles.image } resizeMode='contain' src={image}/>
+    <Text style={ styles.productTitle }>
+    {
+    title.length < maxProductTitleLength ? title.toLowerCase()
+      : title.slice(0, maxProductTitleLength).toLowerCase() + '...'
+    }
+    </Text>
 
   </TouchableOpacity>
-
   </View>
   );
 }
