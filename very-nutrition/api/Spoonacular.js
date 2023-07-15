@@ -4,7 +4,7 @@ const axios = require('axios');
 const urlSpoonacular =
   'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com';
 
-function getFoodProduct(foodProduct) {
+async function getFoodProduct(foodProduct) {
   const options = {
     method: 'GET',
     url: `${urlSpoonacular}/food/products/search`,
@@ -21,16 +21,14 @@ function getFoodProduct(foodProduct) {
 
   try {
     const response = await axios.request(options);
-    console.log(response.data);
     return response.data;
   }
   catch (error) {
-    console.error(error);
-    return null;
+    return {};
   }
 };
 
-function getFoodProductDetails(id) {
+async function getFoodProductDetails(id) {
   const options = {
     method: 'GET',
     url: `${urlSpoonacular}/food/products/${id}`,
@@ -42,12 +40,10 @@ function getFoodProductDetails(id) {
   
   try {
     const response = await axios.request(options);
-    console.log(response.data);
     return response.data;
   }
   catch (error) {
-    console.error(error);
-    return null;
+    return {};
   }
 }
 
