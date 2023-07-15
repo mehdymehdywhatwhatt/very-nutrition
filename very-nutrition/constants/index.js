@@ -15,5 +15,6 @@ const AppSizes = {
 
 const SafePadding = Platform.OS === 'android' ? 20 : 0;
 
-export { AppColors, AppFonts, AppSizes, SafePadding };
+const keyRapidAPI = '08c1ba332emshaf7596048b8cc62p1b16ccjsnfc0793d3c2d0';
 
+export { AppColors, AppFonts, AppSizes, SafePadding, keyRapidAPI };
