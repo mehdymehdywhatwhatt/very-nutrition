@@ -6,8 +6,7 @@ import { StatusBar } from 'expo-status-bar';
 
 import HomeScreenRibbon from '../components/HomeScreenRibbon';
 import WorkScreenRibbon from '../components/WorkScreenRibbon';
-import ToDefineMeal from '../components/ToDefineMeal';
-import ToMealCalendar from '../components/ToMealCalendar';
+import ToWorkScreen from '../components/ToWorkScreen';
 import SafePadding from '../constants';
 
 export default function HomeScreen() {
@@ -16,8 +15,8 @@ export default function HomeScreen() {
   <HomeScreenRibbon/>
 
   <ScrollView style={{ flex : 1, backgroundColor : 'lightgray' }}>
-    <ToDefineMeal/>
-    <ToMealCalendar/>
+    <ToWorkScreen destinationScreen={'DefineMeal'}/>
+    <ToWorkScreen destinationScreen={'MealCalendar'}/>
   </ScrollView>
 
   <ScrollView>

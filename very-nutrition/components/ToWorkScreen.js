@@ -6,13 +6,13 @@ import { StatusBar } from 'expo-status-bar';
 
 import { AppColors, AppFonts, AppSizes } from '../constants';
 
-export default function ToDefineMeal() {
+export default function ToWorkScreen({destinationScreen}) {
   const navigation = useNavigation();
 
   return (
   <View style={{ flex : 1, backgroundColor : 'white', borderColor : 'black', borderRadius : AppSizes.HomeScreenElementBorderRadius, borderWidth : AppSizes.HomeScreenElementBorderWidth, height : AppSizes.HomeScreenElementHeight, padding : AppSizes.HomeScreenElementPadding }}>
-    <TouchableOpacity style={{ flex : 1 }} onPress={() => navigation.push('DefineMeal')}>
-      <Text style={{ flex : 1, fontSize : AppSizes.HomeScreenElementTextSize, textAlign : 'center', textAlignVertical : 'center' }}>ToDefineMeal</Text>
+    <TouchableOpacity style={{ flex : 1 }} onPress={() => navigation.push(destinationScreen)}>
+      <Text style={{ flex : 1, fontSize : AppSizes.HomeScreenElementTextSize, textAlign : 'center', textAlignVertical : 'center' }}>To{destinationScreen}</Text>
     </TouchableOpacity>
   </View>
   );
