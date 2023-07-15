@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 
 import HomeScreenRibbon from '../components/HomeScreenRibbon';
-import WorkScreenRibbon from '../components/WorkScreenRibbon';
+import BackRibbon from '../components/BackRibbon';
 import ToWorkScreen from '../components/ToWorkScreen';
 import SafePadding from '../constants';
 

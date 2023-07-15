@@ -6,17 +6,19 @@ import { StatusBar } from 'expo-status-bar';
 
 import { AppColors, AppFonts, AppSizes, SafePadding } from '../constants';
 
-export default function WorkScreenRibbon() {
+export default function BackRibbon() {
   const navigation = useNavigation();
 
   return (
   <View style={{ backgroundColor : 'white', paddingTop : SafePadding }}>
     <TouchableOpacity onPress={() => navigation.goBack()}>
-    <Text style={{ fontSize : AppSizes.RibbonTextSize, color : 'black', fontWeight : 'bold', textAlign : 'left', textAlignVertical : 'center' }}>back</Text>
+    <Text style={{ fontSize : AppSizes.RibbonTextSize,
+      color : 'black',
+      fontWeight : 'bold',
+      textAlign : 'left',
+      textAlignVertical : 'center' }}>back</Text>
     </TouchableOpacity>
   </View>
   );
 }
 
-//    <TouchableOpacity style={{ flex : 1 }} >
-//    </TouchableOpacity>

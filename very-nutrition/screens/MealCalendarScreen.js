@@ -4,12 +4,12 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 
-import WorkScreenRibbon from '../components/WorkScreenRibbon';
+import BackRibbon from '../components/BackRibbon';
 
 export default function MealCalendarScreen() {
   return (
   <View style={{ flex : 1, backgroundColor : 'white' }}>
-  <WorkScreenRibbon/>
+  <BackRibbon/>
   <Text>
     MealCalendarScreen. Use this screen to log meals that you ate, and when you ate them.
   </Text>
