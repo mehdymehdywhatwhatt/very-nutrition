@@ -44,6 +44,7 @@ export default function DefineMealScreen() {
     onChangeText={(text) => {set_searchedFood(text)}}/>
 
   <FlatList
+  style={{ gridTemplateColumns : 'repeat(auto-fill, 250px)', gridAutoRows : '10px'}}
   data={foundFoodProducts}
   renderItem={ ({item}) => {
     return <FoodProduct id={item.id} image={item.image} imageType={item.imageType} title={item.title}/>;

@@ -42,8 +42,6 @@ const styles = StyleSheet.create({
   }
 });
 
-const maxImageDimension = 200;
-
 export default function FoodProduct({id, image, imageType, title}) {
 
   const navigation = useNavigation();
