@@ -27,7 +27,6 @@ export default function DefineMealScreen() {
     const data = await getFoodProducts(searchedFood);
     if (data && data.products) {
       set_foundFoodProducts(data.products);
-      console.log(data.products);
     }
   }
 

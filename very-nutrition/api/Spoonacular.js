@@ -4,6 +4,24 @@ import axios from 'axios';
 const urlSpoonacular =
   'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com';
 
+const FoodNutrientsArrayIndex = {
+  Calcium : 0,
+  Carbohydrates : 1,
+  Cholesterol : 2,
+  Calories : 3,
+  Fat : 4,
+  SaturatedFat : 5,
+  Transfat : 6,
+  Fiber : 7,
+  Iron : 8,
+  Protein : 9,
+  Sodium : 10,
+  Sugar : 11,
+  VitaminA : 12,
+  VitaminC : 13,
+  NetCarbohydrates : 14,
+};
+
 async function getFoodProducts(foodName) {
   const options = {
     method: 'GET',
@@ -49,7 +67,10 @@ async function getFoodProductDetails(id) {
   }
 }
 
-export { getFoodProducts, getFoodProductDetails };
+export { getFoodProducts,
+  getFoodProductDetails,
+  FoodNutrientsArrayIndex
+  };
 
 // Spoonacular Recipe - Food - Nutrition API
 // 

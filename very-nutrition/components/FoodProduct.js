@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
     borderWidth : 3,
     backgroundColor : 'white',
     padding : 10,
-    width : '60%',
     height : 200,
   },
   containerTouchable : {
@@ -39,23 +38,31 @@ const styles = StyleSheet.create({
   },
   image : {
     flex : 1,
+  },
+  foodChevron : {
+    fontSize : 16,
+    fontWeight : '600',
   }
 });
 
 export default function FoodProduct({id, image, imageType, title}) {
 
   const navigation = useNavigation();
+
   return (
   <View style={styles.container}>
   <TouchableOpacity style={ styles.containerTouchable }>
-    <Image style={ styles.image } resizeMode='contain' src={image}/>
+    <Image style={ styles.image } resizeMode='cover' src={image}/>
     <Text style={ styles.productTitle }>
     {
     title.length < maxProductTitleLength ? title.toLowerCase()
       : title.slice(0, maxProductTitleLength).toLowerCase() + '...'
     }
     </Text>
-
+  </TouchableOpacity>
+  <TouchableOpacity style={ styles.containerTouchable }
+    onPress={() => {navigation.push('FoodProductDetails', id)}} >
+    <Text>{'>'}</Text>
   </TouchableOpacity>
   </View>
   );
