@@ -12,7 +12,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 
-const maxProductTitleLength = 24;
+const maxProductTitleLength = 32;
 const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({

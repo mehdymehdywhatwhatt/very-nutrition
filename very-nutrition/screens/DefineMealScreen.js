@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   textInput : {
     height : 30,
     fontSize : 16,
-    fontWeight : '500',
+    fontWeight : '400',
     color : 'black',
     borderWidth : 1,
     borderColor : 'black',
