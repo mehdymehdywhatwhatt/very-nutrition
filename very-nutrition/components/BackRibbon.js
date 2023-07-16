@@ -1,10 +1,15 @@
-import { StyleSheet, View, Text, TouchableOpacity, ScrollView, Platform } from 'react-native';
+import { StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+  Platform } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 
-import { AppColors, AppFonts, AppSizes, SafePadding } from '../constants';
+import { SafePadding, commonStyles } from '../constants';
 
 export default function BackRibbon() {
   const navigation = useNavigation();
@@ -12,11 +17,7 @@ export default function BackRibbon() {
   return (
   <View style={{ backgroundColor : 'white', paddingTop : SafePadding }}>
     <TouchableOpacity onPress={() => navigation.goBack()}>
-    <Text style={{ fontSize : AppSizes.RibbonTextSize,
-      color : 'black',
-      fontWeight : 'bold',
-      textAlign : 'left',
-      textAlignVertical : 'center' }}>back</Text>
+    <Text style={ commonStyles.ribbon }>back</Text>
     </TouchableOpacity>
   </View>
   );

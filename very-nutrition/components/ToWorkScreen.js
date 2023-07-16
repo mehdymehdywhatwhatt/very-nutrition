@@ -4,15 +4,21 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 
-import { AppColors, AppFonts, AppSizes } from '../constants';
+import { AppSizes } from '../constants';
 
-export default function ToWorkScreen({destinationScreen}) {
+export default function ToWorkScreen({destinationScreen, userHint}) {
   const navigation = useNavigation();
 
   return (
-  <View style={{ flex : 1, backgroundColor : 'white', borderColor : 'black', borderRadius : AppSizes.HomeScreenElementBorderRadius, borderWidth : AppSizes.HomeScreenElementBorderWidth, height : AppSizes.HomeScreenElementHeight, padding : AppSizes.HomeScreenElementPadding }}>
+  <View style={{ flex : 1,
+    backgroundColor : 'white',
+    borderColor : 'black',
+    borderRadius : AppSizes.HomeScreenElementBorderRadius,
+    borderWidth : AppSizes.HomeScreenElementBorderWidth,
+    height : AppSizes.HomeScreenElementHeight,
+    padding : AppSizes.HomeScreenElementPadding }}>
     <TouchableOpacity style={{ flex : 1 }} onPress={() => navigation.push(destinationScreen)}>
-      <Text style={{ flex : 1, fontSize : AppSizes.HomeScreenElementTextSize, textAlign : 'center', textAlignVertical : 'center' }}>To{destinationScreen}</Text>
+      <Text style={{ flex : 1, fontSize : AppSizes.HomeScreenElementTextSize, textAlign : 'center', textAlignVertical : 'center' }}>{userHint}</Text>
     </TouchableOpacity>
   </View>
   );

@@ -1,3 +1,5 @@
+import { StyleSheet } from 'react-native';
+
 const AppColors = {
 };
 
@@ -13,8 +15,24 @@ const AppSizes = {
   RibbonTextSize : 24,
 };
 
+const commonStyles = StyleSheet.create({
+  ribbon : {
+    fontSize : 24,
+    fontWeight : '800',
+    color : 'black',
+    textAlign : 'left',
+    textAlignVertical : 'center',
+  },
+});
+
 const SafePadding = Platform.OS === 'android' ? 20 : 0;
 
 const keyRapidAPI = '08c1ba332emshaf7596048b8cc62p1b16ccjsnfc0793d3c2d0';
 
-export { AppColors, AppFonts, AppSizes, SafePadding, keyRapidAPI };
+export { AppColors,
+AppFonts,
+AppSizes,
+SafePadding,
+keyRapidAPI,
+commonStyles};
+

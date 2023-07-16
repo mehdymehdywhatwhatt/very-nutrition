@@ -15,6 +15,7 @@ import BackRibbon from '../components/BackRibbon';
 import FoodProduct from '../components/FoodProduct';
 
 import { getFoodProducts, getFoodProductDetails } from '../api/Spoonacular';
+import { commonStyles } from '../constants';
 
 const textInputHeight = 30;
 
@@ -39,7 +40,9 @@ export default function DefineMealScreen() {
   <View style={{ flex : 1, backgroundColor : 'white' }}>
   <BackRibbon/>
 
-  <TextInput style={{ height : textInputHeight, backgroundColor : 'lightgray' }}
+  <View style={{ flex : 1, backgroundColor : 'lightgray' }}>
+  <Text style={ commonStyles.ribbon }>search foods</Text>
+  <TextInput style={{ height : textInputHeight, backgroundColor : 'white' }}
     onChangeText={(text) => {set_searchedFood(text)}}/>
 
   <FlatList
@@ -48,6 +51,10 @@ export default function DefineMealScreen() {
   renderItem={ ({item}) => {
     return <FoodProduct id={item.id} image={item.image} imageType={item.imageType} title={item.title}/>;
   }}/>
+  </View>
+
+  <View style={{ flex : 1, backgroundColor : 'black' }}>
+  </View>
 
   </View>
 

@@ -4,12 +4,12 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 
-import { AppColors, AppFonts, AppSizes, SafePadding } from '../constants';
+import { SafePadding, commonStyles } from '../constants';
 
 export default function HomeScreenRibbon() {
   return (
   <View style={{ backgroundColor : 'white', paddingTop : SafePadding }}>
-    <Text style={{ fontSize : AppSizes.RibbonTextSize, color : 'black', fontWeight : 'bold', textAlign : 'center', textAlignVertical : 'center' }}>very nutrition</Text>
+    <Text style={ commonStyles.ribbon }>very nutrition</Text>
   </View>
   );
 }
