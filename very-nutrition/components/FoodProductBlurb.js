@@ -5,7 +5,8 @@ Text,
 TouchableOpacity,
 ScrollView,
 Platform,
-Dimensions } from 'react-native';
+Dimensions,
+ImageBackground } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
@@ -26,11 +27,7 @@ const styles = StyleSheet.create({
     margin : 10,
     padding : 2,
   },
-  containerImage : {
-    flex : 9,
-  },
   containerDetails : {
-    flex : 1,
     direction : 'rtl',
   },
   productTitle : {
@@ -39,11 +36,12 @@ const styles = StyleSheet.create({
     textAlignVertical : 'bottom',
     textAlign : 'right',
     fontWeight : '600',
+    marginTop : 'auto',
   },
   image : {
     flex : 1,
   },
-  foodDetailsChevron : {
+  foodChevron : {
     fontSize : 16,
     fontWeight : '600',
     textAlign : 'right',
@@ -57,19 +55,31 @@ export default function FoodProductBlurb({id, image, imageType, title}) {
 
   return (
   <View style={styles.container}>
-  <TouchableOpacity style={ styles.containerImage }>
-    <Image style={ styles.image } resizeMode='cover' src={image}/>
-    <Text style={ styles.productTitle }>
-    {
-    title.length < maxProductTitleLength ? title.toLowerCase()
-      : title.slice(0, maxProductTitleLength).toLowerCase() + '...'
-    }
-    </Text>
-  </TouchableOpacity>
+  <ImageBackground style={ styles.image } resizeMode='cover' src={image}>
+
+  <Text style={ styles.productTitle }>
+  {
+  title.length < maxProductTitleLength ? title.toLowerCase()
+    : title.slice(0, maxProductTitleLength).toLowerCase() + '...'
+  }
+  </Text>
+
   <TouchableOpacity style={ styles.containerDetails }
     onPress={() => {navigation.push('FoodProductDetails', id)}}>
-    <Text style={ styles.foodDetailsChevron }>{'details >'}</Text>
+    <Text style={ styles.foodChevron }>{'details >'}</Text>
   </TouchableOpacity>
+
+  <TouchableOpacity style={ styles.containerDetails }
+    onPress={() => {}}>
+    <Text style={ styles.foodChevron }>{'add to meal >'}</Text>
+  </TouchableOpacity>
+
+  <TouchableOpacity style={ styles.containerDetails }
+    onPress={() => {}}>
+    <Text style={ styles.foodChevron }>{'remove from meal >'}</Text>
+  </TouchableOpacity>
+
+  </ImageBackground>
   </View>
   );
 }
