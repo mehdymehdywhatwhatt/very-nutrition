@@ -14,7 +14,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 
 import BackRibbon from '../components/BackRibbon';
-import FoodProduct from '../components/FoodProduct';
+import FoodProductBlurb from '../components/FoodProductBlurb';
 
 import { getFoodProductDetails, FoodNutrientsArrayIndex } from '../api/Spoonacular';
 

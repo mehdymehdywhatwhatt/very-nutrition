@@ -13,7 +13,7 @@ import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 
 import BackRibbon from '../components/BackRibbon';
-import FoodProduct from '../components/FoodProduct';
+import FoodProductBlurb from '../components/FoodProductBlurb';
 
 import { getFoodProducts, getFoodProductDetails } from '../api/Spoonacular';
 import { commonStyles } from '../constants';
@@ -65,7 +65,7 @@ export default function DefineMealScreen() {
     <FlatList
     data={foundFoodProducts}
     renderItem={ ({item}) => {
-      return <FoodProduct id={item.id} image={item.image} imageType={item.imageType} title={item.title}/>;
+      return <FoodProductBlurb id={item.id} image={item.image} imageType={item.imageType} title={item.title}/>;
     }}/>
   </View>
 

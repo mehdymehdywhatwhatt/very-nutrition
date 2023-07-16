@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export default function FoodProduct({id, image, imageType, title}) {
+export default function FoodProductBlurb({id, image, imageType, title}) {
 
   const navigation = useNavigation();
 
