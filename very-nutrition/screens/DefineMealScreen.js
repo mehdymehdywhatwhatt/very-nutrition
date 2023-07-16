@@ -14,6 +14,7 @@ import { StatusBar } from 'expo-status-bar';
 
 import BackRibbon from '../components/BackRibbon';
 import FoodProductBlurb from '../components/FoodProductBlurb';
+import MealBlurb from '../components/MealBlurb';
 
 import { getFoodProducts, getFoodProductDetails } from '../api/Spoonacular';
 import { commonStyles } from '../constants';
@@ -73,7 +74,7 @@ export default function DefineMealScreen() {
     <Text style={ commonStyles.ribbon }>view and edit meals</Text>
     <FlatList
     data={userMeals}
-    renderItem={ ({item}) => <Text>Meal</Text> }
+    renderItem={ ({item, index}) => <MealBlurb mealName={'meal' + index.toString()}/> }
     />
   </View>
 

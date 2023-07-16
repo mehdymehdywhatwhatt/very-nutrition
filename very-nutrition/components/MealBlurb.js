@@ -18,14 +18,14 @@ const styles = StyleSheet.create({
     borderRadius : 10,
     borderColor : 'black',
     borderStyle : 'solid',
-    borderWidth : 3,
+    borderWidth : 2,
     backgroundColor : 'white',
-    height : 20,
+    height : 80,
 
-    margin : 10,
-    padding : 2,
+    margin : 5,
+    padding : 1,
   },
-  containerDetails : {
+  containerTouchable : {
     flex : 1,
     direction : 'rtl',
   },
@@ -34,24 +34,35 @@ const styles = StyleSheet.create({
     fontWeight : '600',
     textAlign : 'left',
     textAlignVertical : 'center',
-  }
-  foodDetailsChevron : {
+  },
+  foodChevron : {
     fontSize : 16,
     fontWeight : '600',
     textAlign : 'right',
     textAlignVertical : 'center',
-  }
+  },
 });
 
-export default function Meal({mealName}) {
+export default function MealBlurb({mealName}) {
+
+  const navigation = useNavigation();
+
+  [isSelected, set_isSelected] = useState(false);
 
   return (
   <View style={styles.container}>
   <Text style={styles.mealName}>{mealName}</Text>
-  <TouchableOpacity style={ styles.containerDetails }
+
+  <TouchableOpacity style={ styles.containerTouchable }
     onPress={() => {navigation.push('MealDetails', mealName)}}>
-    <Text style={ styles.foodDetailsChevron }>{'details >'}</Text>
+    <Text style={ styles.foodChevron }>{'details >'}</Text>
   </TouchableOpacity>
+
+  <TouchableOpacity style={ styles.containerTouchable }
+    onPress={() => { set_isSelected(!isSelected); }}>
+    <Text style={ styles.foodChevron }>{'select >'}</Text>
+  </TouchableOpacity>
+
   </View>
   );
 }
