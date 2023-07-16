@@ -27,6 +27,11 @@ const styles = StyleSheet.create({
     margin : 10,
     padding : 2,
   },
+  containerChildren : {
+    position : 'absolute',
+    right : '2%',
+    bottom : '2%',
+  },
   containerDetails : {
     direction : 'rtl',
   },
@@ -40,6 +45,7 @@ const styles = StyleSheet.create({
   },
   image : {
     flex : 1,
+    opacity : 0.8,
   },
   foodChevron : {
     fontSize : 16,
@@ -56,6 +62,9 @@ export default function FoodProductBlurb({id, image, imageType, title}) {
   return (
   <View style={styles.container}>
   <ImageBackground style={ styles.image } resizeMode='cover' src={image}>
+  </ImageBackground>
+
+  <View style={ styles.containerChildren }>
   <Text style={ styles.productTitle }>
   {
   title.length < maxProductTitleLength ? title.toLowerCase()
@@ -78,7 +87,7 @@ export default function FoodProductBlurb({id, image, imageType, title}) {
     <Text style={ styles.foodChevron }>{'remove from meal >'}</Text>
   </TouchableOpacity>
 
-  </ImageBackground>
+  </View>
   </View>
   );
 }
