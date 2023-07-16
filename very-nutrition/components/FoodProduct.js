@@ -21,8 +21,10 @@ const styles = StyleSheet.create({
     borderStyle : 'solid',
     borderWidth : 3,
     backgroundColor : 'white',
-    padding : 10,
     height : 200,
+
+    margin : 10,
+    padding : 2,
   },
   containerImage : {
     flex : 9,

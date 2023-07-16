@@ -4,7 +4,8 @@ import { View,
   TouchableOpacity,
   ScrollView,
   Platform,
-  FlatList, } from 'react-native';
+  FlatList,
+  StyleSheet } from 'react-native';
 
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -17,12 +18,29 @@ import FoodProduct from '../components/FoodProduct';
 import { getFoodProducts, getFoodProductDetails } from '../api/Spoonacular';
 import { commonStyles } from '../constants';
 
-const textInputHeight = 30;
+const styles = StyleSheet.create({
+  textInput : {
+    height : 30,
+    fontSize : 16,
+    fontWeight : '500',
+    color : 'black',
+    borderWidth : 1,
+    borderColor : 'black',
+    borderRadius : 10,
+    backgroundColor : 'white',
+
+    textAlign : 'left',
+    textAlignVertical : 'center',
+    margin : 10,
+    padding : 5,
+  },
+});
 
 export default function DefineMealScreen() {
 
   [searchedFood, set_searchedFood] = useState('');
   [foundFoodProducts, set_foundFoodProducts] = useState([]);
+  [userMeals, set_userMeals] = useState([0, 1, 2]);
 
   const fetchFoodIds = async () => {
     const data = await getFoodProducts(searchedFood);
@@ -41,34 +59,26 @@ export default function DefineMealScreen() {
   <BackRibbon/>
 
   <View style={{ flex : 1, backgroundColor : 'lightgray' }}>
-  <Text style={ commonStyles.ribbon }>search foods</Text>
-  <TextInput style={{ height : textInputHeight, backgroundColor : 'white' }}
-    onChangeText={(text) => {set_searchedFood(text)}}/>
+    <Text style={ commonStyles.ribbon }>search foods</Text>
+    <TextInput style={ styles.textInput } onChangeText={(text) => {set_searchedFood(text)}}/>
 
-  <FlatList
-  style={{ gridTemplateColumns : 'repeat(auto-fill, 250px)', gridAutoRows : '10px'}}
-  data={foundFoodProducts}
-  renderItem={ ({item}) => {
-    return <FoodProduct id={item.id} image={item.image} imageType={item.imageType} title={item.title}/>;
-  }}/>
+    <FlatList
+    data={foundFoodProducts}
+    renderItem={ ({item}) => {
+      return <FoodProduct id={item.id} image={item.image} imageType={item.imageType} title={item.title}/>;
+    }}/>
   </View>
 
-  <View style={{ flex : 1, backgroundColor : 'black' }}>
+  <View style={{ flex : 1, backgroundColor : 'white' }}>
+    <Text style={ commonStyles.ribbon }>view and edit meals</Text>
+    <FlatList
+    data={userMeals}
+    renderItem={ ({item}) => <Text>Meal</Text> }
+    />
   </View>
 
   </View>
 
   );
 }
-
-// this scrollview says, here's all the foods that your search brought up
-// each element will have a touchableopacity to put that food, into this meal
-
-// // this scrollview is the foods you have in this meal so far
-// <ScrollView style={{ flex : 1 }}>
-// </ScrollView>
-
-// // this scrollview is the meals you have so far (its own component?)
-// <ScrollView>
-// </ScrollView>
 
