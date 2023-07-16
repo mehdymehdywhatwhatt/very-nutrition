@@ -56,7 +56,6 @@ export default function FoodProductBlurb({id, image, imageType, title}) {
   return (
   <View style={styles.container}>
   <ImageBackground style={ styles.image } resizeMode='cover' src={image}>
-
   <Text style={ styles.productTitle }>
   {
   title.length < maxProductTitleLength ? title.toLowerCase()
