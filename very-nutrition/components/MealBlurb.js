@@ -19,7 +19,6 @@ const styles = StyleSheet.create({
     borderColor : 'black',
     borderStyle : 'solid',
     borderWidth : 2,
-    backgroundColor : 'white',
     height : 80,
 
     margin : 5,
@@ -47,10 +46,10 @@ export default function MealBlurb({mealName}) {
 
   const navigation = useNavigation();
 
-  [isSelected, set_isSelected] = useState(false);
+  const [isSelected, set_isSelected] = useState(false);
 
   return (
-  <View style={styles.container}>
+  <View style={[styles.container,  { backgroundColor : isSelected ? 'lightgray' : 'white'}]}>
   <Text style={styles.mealName}>{mealName}</Text>
 
   <TouchableOpacity style={ styles.containerTouchable }
