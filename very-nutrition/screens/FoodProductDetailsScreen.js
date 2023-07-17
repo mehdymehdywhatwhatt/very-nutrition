@@ -21,8 +21,8 @@ import { getFoodProductDetails, FoodNutrientsArrayIndex } from '../api/Spoonacul
 export default function FoodProductDetailsScreen() {
 
   const { params : id } = useRoute();
-  [foundNutrients, set_foundNutrients] = useState([]);
-  [isLoadingNutrients, set_isLoadingNutrients] = useState(false);
+  const [foundNutrients, set_foundNutrients] = useState([]);
+  const [isLoadingNutrients, set_isLoadingNutrients] = useState(false);
 
   useEffect( () => {
     set_isLoadingNutrients(true);

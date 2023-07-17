@@ -39,9 +39,9 @@ const styles = StyleSheet.create({
 
 export default function DefineMealScreen() {
 
-  [searchedFood, set_searchedFood] = useState('');
-  [foundFoodProducts, set_foundFoodProducts] = useState([]);
-  [userMeals, set_userMeals] = useState([0, 1, 2]);
+  const [searchedFood, set_searchedFood] = useState('');
+  const [foundFoodProducts, set_foundFoodProducts] = useState([]);
+  const [userMeals, set_userMeals] = useState([0, 1, 2]);
 
   const fetchFoodIds = async () => {
     const data = await getFoodProducts(searchedFood);
