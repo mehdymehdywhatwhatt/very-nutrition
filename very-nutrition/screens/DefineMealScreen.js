@@ -83,3 +83,19 @@ export default function DefineMealScreen() {
   );
 }
 
+// Further design notes for the DefineMealScreen.
+// HTTP GET:
+//   retrieve available food products from Spoonacular
+//   retrieve presently-created meals from MongoDB
+//
+// HTTP POST:
+//   create a new meal at MongoDB (must provide unique name)
+//     one meal entity is an array (repeat-values allowed) of Spoonacular food product ids
+//
+// HTTP PUT:
+//   update a meal at MongoDB (add food to the meal)
+//   update a meal at MongoDB (delete food from the meal)
+//
+// HTTP DELETE: 
+//   delete a meal at MongoDB (wipe all associations to other foods)
+//
