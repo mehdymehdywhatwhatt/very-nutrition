@@ -18,8 +18,8 @@ export default function HomeScreen() {
     <ToWorkScreen destinationScreen={'MealCalendar'} userHint={'meal calendar'}/>
   </ScrollView>
 
-  <ScrollView>
-    <Text>maybe some generic news feed content here, loaded from a separate API.</Text>
+  <ScrollView style={{ flex: 1, backgroundColor: "white" }}>
+    <NewsScreen />
   </ScrollView>
 
   </View>
