@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, SafeAreaView, FlatList } from "react-native";
+import { Text, StyleSheet, SafeAreaView, FlatList } from "react-native";
 import axios from "axios";
 import Article from "../components/Article";
+import { AppSizes, SafePadding, commonStyles } from "../constants";
 
 const NewsScreen = () => {
   const [articles, setArticles] = useState([]);
@@ -34,7 +35,8 @@ const NewsScreen = () => {
   }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.news}>
+      <Text style={commonStyles.ribbon}>Food News</Text>
       <FlatList
         data={articles}
         renderItem={({ item }) => (
@@ -45,6 +47,7 @@ const NewsScreen = () => {
             author={item.author}
             publisedAt={item.publisedAt}
             sourceName={item.source.name}
+            url={item.url}
           />
         )}
         keyExtractor={(item) => item.title}
@@ -59,5 +62,14 @@ const styles = StyleSheet.create({
   container: {
     width: "90%",
     alignSelf: "center",
+  },
+  news: {
+    flex: 1,
+    backgroundColor: "white",
+    borderColor: "black",
+    borderRadius: AppSizes.HomeScreenElementBorderRadius,
+    borderWidth: AppSizes.HomeScreenElementBorderWidth,
+    /* height: AppSizes.HomeScreenElementHeight, */
+    padding: AppSizes.HomeScreenElementPadding,
   },
 });
