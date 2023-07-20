@@ -5,6 +5,7 @@ import * as WebBrowser from "expo-web-browser";
 
 const Article = (props) => {
   const goToSource = () => {
+    console.log(props.url);
     WebBrowser.openBrowserAsync(props.url);
   };
 
