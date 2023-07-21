@@ -33,9 +33,7 @@ export default function HomeScreen() {
         />
       </ScrollView>
 
-      <ScrollView style={{ flex: 1, backgroundColor: "lightgray" }}>
-        <NewsScreen />
-      </ScrollView>
+      <NewsScreen />
     </View>
   );
 }
