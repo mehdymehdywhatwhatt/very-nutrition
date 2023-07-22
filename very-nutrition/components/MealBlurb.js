@@ -53,7 +53,7 @@ export default function MealBlurb({mealName, onPressDelete}) {
   <Text style={styles.mealName}>{mealName}</Text>
 
   <TouchableOpacity style={ styles.containerTouchable }
-    onPress={() => {navigation.push('MealDetails', mealName)}}>
+    onPress={() => { navigation.push('MealDetails', mealName) }}>
     <Text style={ styles.foodChevron }>{'details >'}</Text>
   </TouchableOpacity>
 

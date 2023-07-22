@@ -17,7 +17,6 @@ import { StatusBar } from 'expo-status-bar';
 import BackRibbon from '../components/BackRibbon';
 import FoodProductBlurb from '../components/FoodProductBlurb';
 import MealBlurb from '../components/MealBlurb';
-
 import { getFoodProducts, getFoodProductDetails } from '../api/Spoonacular';
 import { createMeal, deleteMeal, findAllMeals, findMealByName } from '../api/MongoDB';
 import { commonStyles } from '../constants';

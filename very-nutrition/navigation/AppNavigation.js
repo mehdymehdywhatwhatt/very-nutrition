@@ -5,6 +5,7 @@ import HomeScreen from '../screens/HomeScreen';
 import DefineMealScreen from '../screens/DefineMealScreen';
 import MealCalendarScreen from '../screens/MealCalendarScreen';
 import FoodProductDetailsScreen from '../screens/FoodProductDetailsScreen';
+import MealDetailsScreen from '../screens/MealDetailsScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,6 +17,7 @@ export default function AppNavigation() {
     <Stack.Screen name='DefineMeal' options={{ headerShown : false }} component={DefineMealScreen} />
     <Stack.Screen name='MealCalendar' options={{ headerShown : false }} component={MealCalendarScreen} />
     <Stack.Screen name='FoodProductDetails' options={{ headerShown : false }} component={FoodProductDetailsScreen} />
+    <Stack.Screen name='MealDetails' options={{ headerShown : false }} component={MealDetailsScreen}/>
     </Stack.Navigator>
     </NavigationContainer>
   )
