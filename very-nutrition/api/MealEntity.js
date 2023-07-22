@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 
 const MealEntitySchema = mongoose.Schema(
   {
-    name: {
+    meal_name: {
       type: String,
-      required : [true, 'please enter a meal name']
+      required : true,
     },
     spoonacular_ids: {
       type: [Number],
@@ -12,7 +12,7 @@ const MealEntitySchema = mongoose.Schema(
     },
   },
   {
-    timestamps: true,
+    timestamps: true
   }
 );
 

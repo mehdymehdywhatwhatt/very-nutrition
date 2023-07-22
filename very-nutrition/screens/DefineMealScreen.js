@@ -41,12 +41,19 @@ export default function DefineMealScreen() {
 
   const [searchedFood, set_searchedFood] = useState('');
   const [foundFoodProducts, set_foundFoodProducts] = useState([]);
-  const [userMeals, set_userMeals] = useState([0, 1, 2]);
+  const [mealEntitys, set_mealEntitys] = useState([]);
 
   const fetchFoodIds = async () => {
     const data = await getFoodProducts(searchedFood);
     if (data && data.products) {
       set_foundFoodProducts(data.products);
+    }
+  }
+
+  const fetchMealEntitys = async () => {
+    const data = await getMealEntitys();
+    if (data) {
+      set_mealEntitys(data);
     }
   }
 
@@ -74,7 +81,7 @@ export default function DefineMealScreen() {
     <Text style={ commonStyles.ribbon }>view and edit meals</Text>
     <FlatList
     data={userMeals}
-    renderItem={ ({item, index}) => <MealBlurb mealName={'meal' + index.toString()}/> }
+    renderItem={ ({item, index}) => <MealBlurb mealName={'asdf'}/> }
     />
   </View>
 
@@ -87,6 +94,7 @@ export default function DefineMealScreen() {
 // HTTP GET:
 //   retrieve available food products from Spoonacular
 //   retrieve presently-created meals from MongoDB
+//   MongoDB: /find
 //
 // HTTP POST:
 //   create a new meal at MongoDB (must provide unique name)
