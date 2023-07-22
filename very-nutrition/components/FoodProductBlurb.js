@@ -55,7 +55,8 @@ const styles = StyleSheet.create({
   }
 });
 
-export default function FoodProductBlurb({id, image, imageType, title}) {
+export default function FoodProductBlurb({
+  id, image, imageType, title, onAddFoodToSelectedMeals, onDeleteFoodFromSelectedMeals}) {
 
   const navigation = useNavigation();
 
@@ -78,13 +79,13 @@ export default function FoodProductBlurb({id, image, imageType, title}) {
   </TouchableOpacity>
 
   <TouchableOpacity style={ styles.containerDetails }
-    onPress={() => {}}>
-    <Text style={ styles.foodChevron }>{'add to meal >'}</Text>
+    onPress={() => { onAddFoodToSelectedMeals(spoonacular_id) }}>
+    <Text style={ styles.foodChevron }>{'add to selected meals >'}</Text>
   </TouchableOpacity>
 
   <TouchableOpacity style={ styles.containerDetails }
-    onPress={() => {}}>
-    <Text style={ styles.foodChevron }>{'remove from meal >'}</Text>
+    onPress={() => { onDeleteFoodFromSelectedMeals(spoonacular_id) }}>
+    <Text style={ styles.foodChevron }>{'delete from selected meals >'}</Text>
   </TouchableOpacity>
 
   </View>

@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function MealBlurb({mealName, onPressDelete}) {
+export default function MealBlurb({mealName, onPressDelete, notifySelected, notifyUnselected }) {
 
   const navigation = useNavigation();
 
@@ -58,7 +58,14 @@ export default function MealBlurb({mealName, onPressDelete}) {
   </TouchableOpacity>
 
   <TouchableOpacity style={ styles.containerTouchable }
-    onPress={() => { set_isSelected(!isSelected); }}>
+    onPress={() => {
+      set_isSelected(!isSelected);
+      if (isSelected) {
+        notifySelected();
+      }
+      else {
+        notifyUnselected();
+      }}}>
     <Text style={ styles.foodChevron }>{'select >'}</Text>
   </TouchableOpacity>
 

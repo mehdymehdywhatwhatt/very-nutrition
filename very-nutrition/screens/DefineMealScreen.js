@@ -65,6 +65,8 @@ export default function DefineMealScreen() {
   const [mealDeleteName, set_mealDeleteName] = useState('');
   const [isMealListLoading, set_isMealListLoading] = useState(false);
 
+  const [selectedMealNames, set_selectedMealNames] = useState([]);
+
   const fetchFoodIds = async () => {
     const data = await getFoodProducts(searchedFood);
     if (data && data.products) {
@@ -92,6 +94,13 @@ export default function DefineMealScreen() {
     await fetchUserMeals();
   }
 
+  const onAddFoodToSelectedMeals = async (spoonacular_id) => {
+
+  }
+
+  const onDeleteFoodFromSelectedMeals = async (spoonacular_id) => {
+  }
+
   useEffect( () => {
     fetchFoodIds();
   }, [searchedFood]);
@@ -112,7 +121,10 @@ export default function DefineMealScreen() {
     <FlatList
     data={foundFoodProducts}
     renderItem={ ({item}) => {
-      return <FoodProductBlurb id={item.id} image={item.image} imageType={item.imageType} title={item.title}/>;
+    return ( <FoodProductBlurb id={item.id} image={item.image}
+      imageType={item.imageType} title={item.title}
+      onAddFoodToSelectedMeals={onAddFoodToSelectedMeals}
+      onDeleteFoodFromSelectedMeals={onDeleteFoodFromSelectedMeals}/> );
     }}/>
   </View>
 
@@ -127,10 +139,19 @@ export default function DefineMealScreen() {
       <Text style={ commonStyles.ribbon }>view meals</Text>
       <FlatList
       data={userMeals}
-      renderItem={ ({item, index}) => <MealBlurb mealName={item.meal_name}
-        onPressDelete={() =>
-        {
-        deleteMealAndRefresh(item.meal_name)
+      renderItem={ ({item, index}) =>
+      <MealBlurb mealName={item.meal_name}
+        onPressDelete={() => { deleteMealAndRefresh(item.meal_name) }}
+        notifySelected={() => {
+          const l = selectedMealNames;
+          l.push(item.meal_name);
+          set_selectedMealNames(l);
+          console.log(selectedMealNames);
+        }}
+        notifyUnselected={() => {
+          const l = selectedMealNames;
+          set_selectedMealNames(l.filter((each) => each !== item.meal_name));
+          console.log(selectedMealNames);
         }}/>
       }
       style={{ flex : 4 }}

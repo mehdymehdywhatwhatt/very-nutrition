@@ -34,7 +34,6 @@ export default function FoodProductDetailsScreen() {
     if (data && data.nutrition && data.nutrition.nutrients) {
       set_foundNutrients(data.nutrition.nutrients);
       set_isLoadingNutrients(false);
-      console.log(data.nutrition.nutrients);
     }
   }
 

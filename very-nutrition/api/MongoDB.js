@@ -135,7 +135,6 @@ const createMeal = async (arg_meal_name) => {
   await axios(config)
     .then(function (response) {
       rtn = response.data.insertedId;
-      console.log(response.data.insertedId);
     })
     .catch(function (error) {
       console.log(error);
