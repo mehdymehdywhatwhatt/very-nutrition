@@ -109,6 +109,10 @@ export default function DefineMealScreen() {
     fetchUserMeals();
   }, []);
 
+  useEffect( () => {
+    console.log(selectedMealNames);
+  }, [selectedMealNames]);
+
   return (
 
   <View style={{ flex : 1, backgroundColor : 'white' }}>
@@ -142,16 +146,11 @@ export default function DefineMealScreen() {
       renderItem={ ({item, index}) =>
       <MealBlurb mealName={item.meal_name}
         onPressDelete={() => { deleteMealAndRefresh(item.meal_name) }}
-        notifySelected={() => {
-          const l = selectedMealNames;
-          l.push(item.meal_name);
-          set_selectedMealNames(l);
-          console.log(selectedMealNames);
+        notifySelected={(mealName) => {
+          set_selectedMealNames([... selectedMealNames, mealName]);
         }}
-        notifyUnselected={() => {
-          const l = selectedMealNames;
-          set_selectedMealNames(l.filter((each) => each !== item.meal_name));
-          console.log(selectedMealNames);
+        notifyUnselected={(mealName) => {
+          set_selectedMealNames(selectedMealNames.filter((each) => each !== mealName));
         }}/>
       }
       style={{ flex : 4 }}

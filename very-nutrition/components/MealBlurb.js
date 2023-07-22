@@ -59,13 +59,14 @@ export default function MealBlurb({mealName, onPressDelete, notifySelected, noti
 
   <TouchableOpacity style={ styles.containerTouchable }
     onPress={() => {
-      set_isSelected(!isSelected);
-      if (isSelected) {
-        notifySelected();
+      if (!isSelected) {
+        notifySelected(mealName);
       }
       else {
-        notifyUnselected();
-      }}}>
+        notifyUnselected(mealName);
+      }
+      set_isSelected(!isSelected);
+      }}>
     <Text style={ styles.foodChevron }>{'select >'}</Text>
   </TouchableOpacity>
 
