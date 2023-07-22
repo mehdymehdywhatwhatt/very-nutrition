@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     borderColor : 'black',
     borderStyle : 'solid',
     borderWidth : 2,
-    height : 80,
+    height : 100,
 
     margin : 5,
     padding : 1,
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function MealBlurb({mealName}) {
+export default function MealBlurb({mealName, onPressDelete}) {
 
   const navigation = useNavigation();
 
@@ -60,6 +60,11 @@ export default function MealBlurb({mealName}) {
   <TouchableOpacity style={ styles.containerTouchable }
     onPress={() => { set_isSelected(!isSelected); }}>
     <Text style={ styles.foodChevron }>{'select >'}</Text>
+  </TouchableOpacity>
+
+  <TouchableOpacity style={ styles.containerTouchable }
+    onPress={onPressDelete}>
+    <Text style={ styles.foodChevron}>{'delete >'}</Text>
   </TouchableOpacity>
 
   </View>
