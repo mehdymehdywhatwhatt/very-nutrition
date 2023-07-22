@@ -17,10 +17,11 @@ import FoodProductBlurb from '../components/FoodProductBlurb';
 import MealBlurb from '../components/MealBlurb';
 
 import { getFoodProducts, getFoodProductDetails } from '../api/Spoonacular';
+import { createMeal, deleteMeal, findAllMeals } from '../api/MongoDB';
 import { commonStyles } from '../constants';
 
 const styles = StyleSheet.create({
-  textInput : {
+  searchFoodTextInput : {
     height : 30,
     fontSize : 16,
     fontWeight : '400',
@@ -35,13 +36,23 @@ const styles = StyleSheet.create({
     margin : 10,
     padding : 5,
   },
+  addDeleteMealTextInput : {
+    borderColor : 'black',
+    fontSize : 16,
+    width : '80%',
+    backgroundColor : 'red',
+  },
 });
 
 export default function DefineMealScreen() {
 
   const [searchedFood, set_searchedFood] = useState('');
   const [foundFoodProducts, set_foundFoodProducts] = useState([]);
-  const [mealEntitys, set_mealEntitys] = useState([]);
+  const [userMeals, set_userMeals] = useState([]);
+
+  const [mealAddName, set_mealAddName] = useState('');
+  const [mealDeleteName, set_mealDeleteName] = useState('');
+  const [isMealListDirty, set_isMealListDirty] = useState(false);
 
   const fetchFoodIds = async () => {
     const data = await getFoodProducts(searchedFood);
@@ -50,16 +61,20 @@ export default function DefineMealScreen() {
     }
   }
 
-  const fetchMealEntitys = async () => {
-    const data = await getMealEntitys();
+  const fetchUserMeals = async () => {
+    const data = await findAllMeals();
     if (data) {
-      set_mealEntitys(data);
+      set_userMeals(data);
     }
   }
 
   useEffect( () => {
     fetchFoodIds();
   }, [searchedFood]);
+
+  useEffect( () => {
+    fetchUserMeals();
+  }, [isMealListDirty]);
 
   return (
 
@@ -68,7 +83,7 @@ export default function DefineMealScreen() {
 
   <View style={{ flex : 1, backgroundColor : 'lightgray' }}>
     <Text style={ commonStyles.ribbon }>search foods</Text>
-    <TextInput style={ styles.textInput } onChangeText={(text) => {set_searchedFood(text)}}/>
+    <TextInput style={ styles.searchFoodTextInput } onChangeText={(text) => {set_searchedFood(text)}}/>
 
     <FlatList
     data={foundFoodProducts}
@@ -78,11 +93,37 @@ export default function DefineMealScreen() {
   </View>
 
   <View style={{ flex : 1, backgroundColor : 'white' }}>
-    <Text style={ commonStyles.ribbon }>view and edit meals</Text>
+    <Text style={ commonStyles.ribbon }>view meals</Text>
     <FlatList
     data={userMeals}
-    renderItem={ ({item, index}) => <MealBlurb mealName={'asdf'}/> }
+    renderItem={ ({item, index}) => <MealBlurb mealName={item.meal_name}/> }
+    style={{ flex : 4 }}
     />
+
+    <View style={{ flex : 1 }}>
+    <TouchableOpacity style={{ width : '20%' }}
+      onPress={() => createMeal(mealAddname)}>
+    </TouchableOpacity>
+    <TextInput style={styles.addDeleteMealTextInput} placeholder={'add a meal'}
+      onChangeText={(text) =>
+      {
+        set_mealAddName(text);
+        set_isMealListDirty(true);
+      }}/>
+    </View>
+
+    <View style={{ flex : 1 }}>
+    <TouchableOpacity style={{ width : '20%' }}
+      onPress={() => deleteMeal(mealDeleteName)}>
+    </TouchableOpacity>
+    <TextInput style={styles.addDeleteMealTextInput} placeholder={'delete a meal'}
+      onChangeText={(text) =>
+      {
+        set_mealDeleteName(text);
+        set_isMealListDirty(true);
+      }}/>
+    </View>
+
   </View>
 
   </View>
@@ -90,20 +131,4 @@ export default function DefineMealScreen() {
   );
 }
 
-// Further design notes for the DefineMealScreen.
-// HTTP GET:
-//   retrieve available food products from Spoonacular
-//   retrieve presently-created meals from MongoDB
-//   MongoDB: /find
-//
-// HTTP POST:
-//   create a new meal at MongoDB (must provide unique name)
-//     one meal entity is an array (repeat-values allowed) of Spoonacular food product ids
-//
-// HTTP PUT:
-//   update a meal at MongoDB (add food to the meal)
-//   update a meal at MongoDB (delete food from the meal)
-//
-// HTTP DELETE: 
-//   delete a meal at MongoDB (wipe all associations to other foods)
-//
+

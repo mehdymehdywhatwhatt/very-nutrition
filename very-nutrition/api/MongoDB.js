@@ -1,8 +1,6 @@
 import mongoose from 'mongoose';
 import MealEntity from './MealEntity';
 
-mongoose.set('strictQuery', false);
-
 const urlMongo = 'mongodb+srv://exampleuser:exampleuser@cluster0.saatmwu.mongodb.net/exampleuser-meals?retryWrites=true&w=majority';
 
 const findMealByName = async (arg_meal_name) => {
@@ -53,4 +51,11 @@ const renameMeal = async (arg_meal_name, arg_new_meal_name) => {
   }
   else { return null; }
 }
+
+export { findMealByName,
+findAllMeals,
+createMeal,
+deleteMeal,
+updateMeal,
+renameMeal }
 
