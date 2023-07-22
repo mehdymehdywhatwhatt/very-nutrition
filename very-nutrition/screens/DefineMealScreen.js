@@ -17,7 +17,7 @@ import FoodProductBlurb from '../components/FoodProductBlurb';
 import MealBlurb from '../components/MealBlurb';
 
 import { getFoodProducts, getFoodProductDetails } from '../api/Spoonacular';
-import { urlMongo, createMeal, deleteMeal, findAllMeals } from '../api/MongoDB';
+import { createMeal, deleteMeal, findAllMeals, findMealByName } from '../api/MongoDB';
 import { commonStyles } from '../constants';
 
 const styles = StyleSheet.create({
@@ -104,33 +104,26 @@ export default function DefineMealScreen() {
     style={{ flex : 4 }}
     />
 
-    <View style={{ flex : 1 }}>
-    <TouchableOpacity style={styles.addDeleteMealPressable}
-      onPress={() => createMeal(mealAddName)}>
-    </TouchableOpacity>
-    <TextInput style={styles.addDeleteMealTextInput} placeholder={'add a meal'}
-      onChangeText={(text) =>
-      {
-        set_mealAddName(text);
-      }}/>
-    </View>
+  </View>
 
-    <View style={{ flex : 1 }}>
+  <View style={{ flexDirection : 'row' }}>
+    <TextInput style={styles.addDeleteMealTextInput}
+      onChangeText={(text) => {set_mealAddName(text)}} placeholder={'create a meal'}/>
     <TouchableOpacity style={styles.addDeleteMealPressable}
-      onPress={() => deleteMeal(mealDeleteName)}>
+      onPress={() => { createMeal(mealAddName); fetchUserMeals(); }}>
     </TouchableOpacity>
-    <TextInput style={styles.addDeleteMealTextInput} placeholder={'delete a meal'}
-      onChangeText={(text) =>
-      {
-        set_mealDeleteName(text);
-      }}/>
-    </View>
+  </View>
 
+  <View style={{ flexDirection : 'row' }}>
+    <TextInput style={styles.addDeleteMealTextInput}
+      onChangeText={(text) => {set_mealDeleteName(text)}} placeholder={'delete a meal'}/>
+    <TouchableOpacity style={styles.addDeleteMealPressable}
+      onPress={() => { deleteMeal(mealDeleteName); fetchUserMeals(); }}>
+    </TouchableOpacity>    
   </View>
 
   </View>
 
   );
 }
-
 
