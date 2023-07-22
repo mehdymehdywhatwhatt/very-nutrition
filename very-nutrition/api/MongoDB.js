@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 import MealEntity from './MealEntity';
 
 const urlMongo = 'mongodb+srv://exampleuser:exampleuser@cluster0.saatmwu.mongodb.net/exampleuser-meals?retryWrites=true&w=majority';
@@ -57,5 +57,7 @@ findAllMeals,
 createMeal,
 deleteMeal,
 updateMeal,
-renameMeal }
+renameMeal,
+urlMongo  }
+
 

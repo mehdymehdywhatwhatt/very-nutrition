@@ -17,7 +17,7 @@ import FoodProductBlurb from '../components/FoodProductBlurb';
 import MealBlurb from '../components/MealBlurb';
 
 import { getFoodProducts, getFoodProductDetails } from '../api/Spoonacular';
-import { createMeal, deleteMeal, findAllMeals } from '../api/MongoDB';
+import { urlMongo, createMeal, deleteMeal, findAllMeals } from '../api/MongoDB';
 import { commonStyles } from '../constants';
 
 const styles = StyleSheet.create({
@@ -37,22 +37,26 @@ const styles = StyleSheet.create({
     padding : 5,
   },
   addDeleteMealTextInput : {
+    flex : 1,
     borderColor : 'black',
     fontSize : 16,
-    width : '80%',
-    backgroundColor : 'red',
+    backgroundColor : 'green',
+  },
+  addDeleteMealPressable : {
+    flex : 1,
+    borderColor : 'black',
+    backgroundColor : 'blue',
   },
 });
 
 export default function DefineMealScreen() {
-
+  
   const [searchedFood, set_searchedFood] = useState('');
   const [foundFoodProducts, set_foundFoodProducts] = useState([]);
   const [userMeals, set_userMeals] = useState([]);
 
   const [mealAddName, set_mealAddName] = useState('');
   const [mealDeleteName, set_mealDeleteName] = useState('');
-  const [isMealListDirty, set_isMealListDirty] = useState(false);
 
   const fetchFoodIds = async () => {
     const data = await getFoodProducts(searchedFood);
@@ -74,7 +78,7 @@ export default function DefineMealScreen() {
 
   useEffect( () => {
     fetchUserMeals();
-  }, [isMealListDirty]);
+  }, []);
 
   return (
 
@@ -101,26 +105,24 @@ export default function DefineMealScreen() {
     />
 
     <View style={{ flex : 1 }}>
-    <TouchableOpacity style={{ width : '20%' }}
-      onPress={() => createMeal(mealAddname)}>
+    <TouchableOpacity style={styles.addDeleteMealPressable}
+      onPress={() => createMeal(mealAddName)}>
     </TouchableOpacity>
     <TextInput style={styles.addDeleteMealTextInput} placeholder={'add a meal'}
       onChangeText={(text) =>
       {
         set_mealAddName(text);
-        set_isMealListDirty(true);
       }}/>
     </View>
 
     <View style={{ flex : 1 }}>
-    <TouchableOpacity style={{ width : '20%' }}
+    <TouchableOpacity style={styles.addDeleteMealPressable}
       onPress={() => deleteMeal(mealDeleteName)}>
     </TouchableOpacity>
     <TextInput style={styles.addDeleteMealTextInput} placeholder={'delete a meal'}
       onChangeText={(text) =>
       {
         set_mealDeleteName(text);
-        set_isMealListDirty(true);
       }}/>
     </View>
 
