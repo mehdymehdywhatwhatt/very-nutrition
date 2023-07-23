@@ -48,7 +48,54 @@ const styles = StyleSheet.create({
     textAlign : 'center',
     textAlignVertical : 'center',
   },
+  caloriesHeader : {
+    textAlign : 'center',
+    textAlignVertical : 'center',
+    fontSize : 26,
+    fontWeight : '400',
+  },
+  caloriesNumber : {
+    textAlign : 'center',
+    textAlignVertical : 'center',
+    fontSize : 26,
+    fontWeight : '400',
+  },
+  macronutrientHeader : {
+    textAlign : 'center',
+    textAlignVertical : 'center',
+    fontSize : 18,
+    fontWeight : '400',
+  },
+  macronutrientNumber : {
+    textAlign : 'center',
+    textAlignVertical : 'center',
+    fontSize : 18,
+    fontWeight : '400',
+  },
+  calculatingWait : {
+    textAlign : 'center',
+    textAlignVertical : 'center',
+    fontSize : 12,
+    fontWeight : '300',
+  },
 });
+
+/*
+ * Helper to perform an "add" on string, suffixed numerics.
+ *
+ * Arguments arg_1 and arg_2 are strings in the form '[number][suffix]',
+ *   for example 4g or 1234g or 314mg.
+ *
+ * Returned value is the arithmetic sum, as a string.
+ *   for example, 4g + 8g (with suffix argument 'g') will return 12g.
+ *
+ * */
+function addSuffixed(arg_1, arg_2, arg_suffix) {
+  const n_1 = Number(arg_1.replace(arg_suffix, ''));
+  const n_2 = Number(arg_2.replace(arg_suffix, ''));
+  const sum = n_1 + n_2;
+  return sum.toString() + arg_suffix;
+}
 
 export default function MealDetailsScreen() {
 
@@ -70,7 +117,7 @@ export default function MealDetailsScreen() {
     return data;
   }
 
-  const fetch = async () => {
+  const fetchSpoonacularEntitys = async () => {
     set_isLoadingSpoonacularEntitys(true);
     const await_mealEntity = await fetchMeal();
     const loading_spoonacularEntitys = [];
@@ -84,7 +131,26 @@ export default function MealDetailsScreen() {
     set_isLoadingSpoonacularEntitys(false);
   }
 
+  const getAggregateMacros = () => {
+
+    const rtn_aggregateMacros = { calories : 0, fat : '0g', protein : '0g', carbs : '0g' };
+
+    for (eachEntity of spoonacularEntitys) {
+      rtn_aggregateMacros.calories += eachEntity.nutrition.calories;
+      rtn_aggregateMacros.fat      = addSuffixed(rtn_aggregateMacros.fat, eachEntity.nutrition.fat, 'g');
+      rtn_aggregateMacros.protein  = addSuffixed(rtn_aggregateMacros.protein, eachEntity.nutrition.protein, 'g');
+      rtn_aggregateMacros.carbs    = addSuffixed(rtn_aggregateMacros.carbs, eachEntity.nutrition.carbs, 'g');
+    }
+
+    return rtn_aggregateMacros;
+  }
+
+  const aggregateMacros = getAggregateMacros();
+
   useEffect(() => {
+    const fetch = async () => {
+      fetchSpoonacularEntitys();
+    }
     fetch();
   }, []);
 
@@ -117,7 +183,39 @@ export default function MealDetailsScreen() {
   </View>
 
   <View style={{ flex : 1, backgroundColor : 'white' }}>
-  <Text style={ commonStyles.ribbon }>aggregate nutrition</Text>
+  <Text style={ commonStyles.ribbon }>macronutrients</Text>
+  <View>
+    <View>
+    <Text style={styles.caloriesHeader}>calories</Text>
+    {
+    isLoadingSpoonacularEntitys ? ( <Text style={styles.calculatingWait}>{'(calculating...)'}</Text>
+      ) : ( <Text style={styles.caloriesNumber}>{aggregateMacros.calories}</Text> )
+    }
+    </View>
+    <View style={{ flexDirection : 'row' }}>
+      <View style={{ flex : 1 }}>
+        <Text style={styles.macronutrientHeader}>carbohydrates</Text>
+        {
+        isLoadingSpoonacularEntitys ? ( <Text style={styles.calculatingWait}>{'(calculating...)'}</Text>
+          ) : ( <Text style={styles.macronutrientNumber}>{aggregateMacros.carbs}</Text> )
+        }
+      </View>
+      <View style={{ flex : 1 }}>
+        <Text style={styles.macronutrientHeader}>protein</Text>
+        {
+        isLoadingSpoonacularEntitys ? ( <Text style={styles.calculatingWait}>{'(calculating...)'}</Text>
+          ) : ( <Text style={styles.macronutrientNumber}>{aggregateMacros.protein}</Text> )
+        }
+      </View>
+      <View style={{ flex : 1 }}>
+        <Text style={styles.macronutrientHeader}>fat</Text>
+        {
+        isLoadingSpoonacularEntitys ? ( <Text style={styles.calculatingWait}>{'(calculating...)'}</Text>
+          ) : ( <Text style={styles.macronutrientNumber}>{aggregateMacros.fat}</Text> )
+        }
+      </View>
+    </View>
+  </View>
   </View>
 
   </View>
