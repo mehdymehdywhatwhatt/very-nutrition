@@ -102,7 +102,13 @@ export default function DefineMealScreen() {
     }
   }
 
-  const onDeleteFoodFromSelectedMeals = async (arg_new_spoonacular_id) => {
+  const onDeleteFoodFromSelectedMeals = async (arg_remove_spoonacular_id) => {
+    for (eachSelectedMealName of selectedMealNames) {
+      const toUpdate = await findMealByName(eachSelectedMealName);
+      toUpdate.spoonacular_ids = toUpdate.spoonacular_ids.filter(
+        (id) => id !== arg_remove_spoonacular_id);
+      const data = await updateMeal(toUpdate.meal_name, toUpdate.spoonacular_ids);
+    }
   }
 
   useEffect( () => {
@@ -112,6 +118,10 @@ export default function DefineMealScreen() {
   useEffect( () => {
     fetchUserMeals();
   }, []);
+
+  useEffect( () => {
+    console.log(selectedMealNames);
+  }, [selectedMealNames]);
 
   return (
 
