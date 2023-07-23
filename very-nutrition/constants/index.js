@@ -12,6 +12,7 @@ const AppSizes = {
   HomeScreenElementBorderRadius : 10,
   HomeScreenElementTextSize : 18,
   HomeScreenElementPadding : 10,
+  HomeScreenElementMargin : 10,
   RibbonTextSize : 24,
 };
 

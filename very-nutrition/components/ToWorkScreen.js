@@ -16,7 +16,7 @@ export default function ToWorkScreen({destinationScreen, userHint}) {
     borderRadius : AppSizes.HomeScreenElementBorderRadius,
     borderWidth : AppSizes.HomeScreenElementBorderWidth,
     height : AppSizes.HomeScreenElementHeight,
-    padding : AppSizes.HomeScreenElementPadding }}>
+    margin : AppSizes.HomeScreenElementMargin }}>
     <TouchableOpacity style={{ flex : 1 }} onPress={() => navigation.push(destinationScreen)}>
       <Text style={{ flex : 1, fontSize : AppSizes.HomeScreenElementTextSize, textAlign : 'center', textAlignVertical : 'center' }}>{userHint}</Text>
     </TouchableOpacity>
