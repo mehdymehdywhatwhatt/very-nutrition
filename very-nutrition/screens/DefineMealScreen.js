@@ -146,7 +146,7 @@ export default function DefineMealScreen() {
     isMealListLoading ? (
       <View style={{ flex : 2, backgroundColor : 'white' }}>
         <Text style={ commonStyles.ribbon }>view meals</Text>
-        <ActivityIndicator style={{ size : 'large', color : 'red', flex : 1 }}/>
+        <ActivityIndicator style={commonStyles.activityIndicator}/>
       </View>
     ) : (
     <View style={{ flex : 2, backgroundColor : 'white' }}>

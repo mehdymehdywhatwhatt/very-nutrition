@@ -15,8 +15,8 @@ import { StatusBar } from 'expo-status-bar';
 
 import BackRibbon from '../components/BackRibbon';
 import FoodProductBlurb from '../components/FoodProductBlurb';
-
 import { getFoodProductDetails, FoodNutrientsArrayIndex } from '../api/Spoonacular';
+import { commonStyles } from '../constants';
 
 export default function FoodProductDetailsScreen() {
 
@@ -42,7 +42,7 @@ export default function FoodProductDetailsScreen() {
     <BackRibbon/>
     {
       isLoadingNutrients ? (
-        <ActivityIndicator style={{ flex : 1, alignSelf : 'center' }}/>
+        <ActivityIndicator style={commonStyles.activityIndicator}/>
       ) : (
       <FlatList
       style={styles.nutritionLabelContainer}

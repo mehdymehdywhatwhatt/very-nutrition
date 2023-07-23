@@ -23,6 +23,11 @@ const commonStyles = StyleSheet.create({
     textAlign : 'left',
     textAlignVertical : 'center',
   },
+  activityIndicator : {
+    size : 'large',
+    color : 'black',
+    flex : 1,
+  },
 });
 
 const SafePadding = Platform.OS === 'android' ? 20 : 0;
