@@ -180,7 +180,7 @@ export default function DefineMealScreen() {
       <Text style={{ textAlign : 'center',
         textAlignVertical : 'center',
         fontSize : 24,
-        fontWeight : '700' }}>+</Text>
+        fontWeight : '400' }}>+</Text>
     </TouchableOpacity>
   </KeyboardAvoidingView>
 
