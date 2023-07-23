@@ -1,0 +1,44 @@
+desktop 4_001.png:
+Initial view of app, from home screen. We see the news section at bottom; which dynamically requests diet-related news articles into a scrollable view. We see the "plan your meals" section at the top, which allows the user to define their own meals, and to define a meal calendar. At time of writing, the meal calendar is not implemented.
+
+At left, we see the MongoDB web application; this will be used for demonstrating the meal creation facilities of the application.
+
+desktop 4_002.png:
+Continuation of prior image. Demonstrates that the news section is scrollable; and that the "actions" section (define a meal, or go to meal calendar) is scrollable; allowing for more features in the future.
+
+desktop 4_003.png:
+Initial view of the "define meal" screen. The define meal screen allows the user to define their own meal, for storage in MongoDB. At left, we see in MongoDB the four meals the user has so far: "my typical breakfast", "my typical lunch", "my typical dinna dinna", and "another test meal". At right, we see the top of those two meals: "my typical breakfast", and "my typical lunch"; in a scrollable view.
+
+The "define meal" screen has a "back" ribbon at top. Because the "back" operation is such a common operation, it is its own component; and allows for a tree-based (single-parent) app navigation that is simple for both users and developers.
+
+desktop 4_004.png:
+Continuation of the previous image. By scrolling down in the "view meals" section, we can see the other two meals that the user has defined.
+
+desktop 4_006.png:
+The user can create yet another meal by entering the name of the new meal in the "create meals" TextInput; then hitting '+'. In this case, the user has defined a new meal called "my midnight snack", and it exists both in MongoDB and in the app frontend. The app frontend is programmed to perform a refresh on create or delete of meals.
+
+desktop 4_007.png:
+The user can delete a meal by pressing the "delete >" control, to the right of the meal controls. By doing so, I have deleted four meals, leaving only "my typical dinna dinna" and "my midnight snack" in the user's profile. We see that the results are confirmed in MongoDB and in the app.
+
+desktop 4_009.png:
+The user can search for foods under the "search foods" section. The query goes out to the Spoonacular API; and retrieves the first few instances that match the query. Each food product that satisfies the query can be added to the meal (via the "add to selected" or "delete from selected" pressables), or inspected for details (via the "details" pressable).
+
+desktop 4_010.png:
+The user can look into details on the food product, and get a nutrition label that displays all nutrition facts for one serving of that product; as gatherable from Spoonacular API.
+
+desktop 4_011.png:
+The user can select meals with the "select" pressable, and then add food products to selected meals. Meals that have been selected to have food added to them, are dynamically styled.
+
+desktop 4_012.png:
+Continuation of above screenshot, with clarification at MongoDB; having added chicken to "my typical dinna dinna" and "my midnight snack".
+
+desktop 4_013.png:
+Continuation of above screenshot, adding additional chicken to either meal, to show that one meal may have repeats of the same food product. Where necessary, this app mitigates key extractor issues that may arise as a result.
+
+desktop 4_014.png, desktop 4_015.png:
+The app will calculate macronutrient (carbohydrate, protein, fat, calories) totals for the user's meal. In '014', we see the app's presentation behavior as it is retrieves extended information for all of this meal's individual food products; and aggregates their macronutrients.
+
+desktop 4_017.png:
+The meal details screen allows the user to delete a given food product from their present meal; so that they don't have to fish it out of the search interface. On deletion, the macronutrient totals are recalculated. We see the update at MongoDB.
+
+
