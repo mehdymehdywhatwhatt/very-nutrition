@@ -17,7 +17,7 @@ import BackRibbon from '../components/BackRibbon';
 import MealBlurb from '../components/MealBlurb';
 import FoodProductBlurb from '../components/FoodProductBlurb';
 import { getFoodProducts, getFoodProductDetails } from '../api/Spoonacular';
-import { createMeal, deleteMeal, findAllMeals, findMealByName } from '../api/MongoDB';
+import { createMeal, deleteMeal, updateMeal, findAllMeals, findMealByName } from '../api/MongoDB';
 import { commonStyles } from '../constants';
 
 const styles = StyleSheet.create({
@@ -154,6 +154,13 @@ export default function MealDetailsScreen() {
     fetch();
   }, []);
 
+  const deleteSpoonacularEntityAndRefresh = async (arg_remove_spoonacular_id) => {
+    const l = mealEntity.spoonacular_ids;
+    l.splice(l.indexOf(arg_remove_spoonacular_id), 1);
+    await updateMeal(mealEntity.meal_name, l);
+    await fetchSpoonacularEntitys();
+  }
+
   return (
   <View style={{ flex : 1, backgroundColor : 'white' }}>
   <BackRibbon/>
@@ -168,15 +175,15 @@ export default function MealDetailsScreen() {
     <FlatList
     data={spoonacularEntitys}
     renderItem={ ({item}) => {
-      return (
+    return (
       <View style={{ flexDirection : 'row' }}>
       <Text style={styles.foodProduct}>{item.title}</Text>
-      <TouchableOpacity style={styles.touchableDelete}>
+      <TouchableOpacity style={styles.touchableDelete}
+        onPress={() => { deleteSpoonacularEntityAndRefresh(item.id) }}>
         <Text style={styles.iconDelete}>-</Text>
       </TouchableOpacity>
       </View>
-      )
-    }}
+    )}}
     keyExtractor={ (item, index) => { return item.id + "-" + index.toString() } }/>
   )
   }
@@ -222,8 +229,3 @@ export default function MealDetailsScreen() {
   );
 }
 
-// basic reqs:
-//   be able to delete foods from the meal, from the MealDetailsScreen
-//   provide aggregate meal nutrition data.
-//   repair the FlatList issue for duplicates-- provide a uniquefying key extractor-done
-//
