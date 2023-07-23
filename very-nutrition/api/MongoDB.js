@@ -9,6 +9,7 @@ const findAllMongo = '/action/find';
 const findOneMongo = '/action/findOne';
 const insertOneMongo = '/action/insertOne';
 const deleteOneMongo = '/action/deleteOne';
+const updateOneMongo = '/action/updateOne';
 
 /**
  * Finds a meal of argument meal name, and returns it.
@@ -213,13 +214,60 @@ const deleteMeal = async (arg_meal_name) => {
 
 }
 
+/* 
+ * Updates one meal in the database.
+ * Returns the count of modified elements, when 'arg_meal_name' is found;
+ *   and sets its 'spoonacular_ids' to 'arg_new_spoonacular_ids'.
+ * Otherwise, returns 'null'.
+ * */
+const updateMeal = async (arg_meal_name, arg_new_spoonacular_ids) => {
+
+  var data = JSON.stringify({
+    "collection": 'mealentities',
+    "database": 'exampleuser-meals',
+    "dataSource": 'Cluster0',
+    "filter": {
+      "meal_name" : arg_meal_name,
+    },
+    "update" : {
+      "$set": {
+        "meal_name" : arg_meal_name,
+        "spoonacular_ids": arg_new_spoonacular_ids,
+      }
+    },
+    "upsert" : false,
+  });
+
+  var config = {
+    method: 'post',
+    url: `${urlMongo}${updateOneMongo}`,
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Request-Headers': '*',
+      'api-key': keyMongo,
+    },
+    data: data
+  };
+
+  let rtn = null;
+  await axios(config)
+    .then(function (response) {
+      rtn = response.data.modifiedCount;
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+  return rtn;
+}
+
 // left todo:
-//   const updateMeal = async (arg_meal_name, arg_new_spoonacular_ids) => {
 //   const renameMeal = async (arg_meal_name, arg_new_meal_name) => {
 
-export { 
+export {
 findMealByName,
 findAllMeals,
 createMeal,
-deleteMeal, }
+deleteMeal,
+updateMeal, }
 

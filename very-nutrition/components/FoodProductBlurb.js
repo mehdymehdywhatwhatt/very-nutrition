@@ -79,12 +79,12 @@ export default function FoodProductBlurb({
   </TouchableOpacity>
 
   <TouchableOpacity style={ styles.containerDetails }
-    onPress={() => { onAddFoodToSelectedMeals(spoonacular_id) }}>
+    onPress={() => { onAddFoodToSelectedMeals(id) }}>
     <Text style={ styles.foodChevron }>{'add to selected meals >'}</Text>
   </TouchableOpacity>
 
   <TouchableOpacity style={ styles.containerDetails }
-    onPress={() => { onDeleteFoodFromSelectedMeals(spoonacular_id) }}>
+    onPress={() => { onDeleteFoodFromSelectedMeals(id) }}>
     <Text style={ styles.foodChevron }>{'delete from selected meals >'}</Text>
   </TouchableOpacity>
 

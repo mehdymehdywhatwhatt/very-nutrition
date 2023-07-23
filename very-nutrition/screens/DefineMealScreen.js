@@ -18,7 +18,7 @@ import BackRibbon from '../components/BackRibbon';
 import FoodProductBlurb from '../components/FoodProductBlurb';
 import MealBlurb from '../components/MealBlurb';
 import { getFoodProducts, getFoodProductDetails } from '../api/Spoonacular';
-import { createMeal, deleteMeal, findAllMeals, findMealByName } from '../api/MongoDB';
+import { createMeal, deleteMeal, findAllMeals, findMealByName, updateMeal } from '../api/MongoDB';
 import { commonStyles } from '../constants';
 
 const styles = StyleSheet.create({
@@ -94,11 +94,15 @@ export default function DefineMealScreen() {
     await fetchUserMeals();
   }
 
-  const onAddFoodToSelectedMeals = async (spoonacular_id) => {
-
+  const onAddFoodToSelectedMeals = async (arg_new_spoonacular_id) => {
+    for (eachSelectedMealName of selectedMealNames) {
+      const toUpdate = await findMealByName(eachSelectedMealName);
+      toUpdate.spoonacular_ids.push(arg_new_spoonacular_id);
+      const data = await updateMeal(toUpdate.meal_name, toUpdate.spoonacular_ids);
+    }
   }
 
-  const onDeleteFoodFromSelectedMeals = async (spoonacular_id) => {
+  const onDeleteFoodFromSelectedMeals = async (arg_new_spoonacular_id) => {
   }
 
   useEffect( () => {
@@ -108,10 +112,6 @@ export default function DefineMealScreen() {
   useEffect( () => {
     fetchUserMeals();
   }, []);
-
-  useEffect( () => {
-    console.log(selectedMealNames);
-  }, [selectedMealNames]);
 
   return (
 
